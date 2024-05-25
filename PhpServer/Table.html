@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabela de Cadastro</title>
+    <link rel="stylesheet" href="Styles/table.css">
+</head>
+<body>
+    <div class="table-wrapper">
+        <input class="searchInput" type="text" id="searchInput" placeholder="Pesquisar...">
+        <button class="button" onclick="window.location.href = 'Envio.html';">Adicionar</button>
+        <button class="button" onclick="window.location.href = 'Alterar.html';">Alterar</button>
+        <table id="userTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Telefone</th>
+                    <th>CPF</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Função para carregar os dados dos usuários via AJAX
+        function carregarUsuarios() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    // Parse da resposta JSON para um array de objetos
+                    var usuarios = JSON.parse(this.responseText);
+
+                    // Referência à tabela
+                    var tableBody = document.querySelector("#userTable tbody");
+
+                    // Limpar a tabela antes de adicionar novos dados
+                    tableBody.innerHTML = "";
+
+                    // Adicionar cada usuário à tabela
+                    usuarios.forEach(function(usuario) {
+                        var row = "<tr>";
+                        row += "<td>" + usuario.id + "</td>";    
+                        row += "<td>" + usuario.username + "</td>";
+                        row += "<td>" + usuario.email + "</td>";
+                        row += "<td>" + usuario.telefone + "</td>";
+                        row += "<td>" + usuario.cpf + "</td>";
+                        row += "<td><button onclick='excluirUsuario(" + usuario.id + ")'>Deletar</button></td>"; // Botão de deletar
+                        row += "</tr>";
+                        tableBody.innerHTML += row;
+                    });
+                }
+            };
+            xhttp.open("GET", "select.php", true);
+            xhttp.send();
+        }
+
+        // Função para excluir um usuário via AJAX
+        function excluirUsuario(idUsuario) {
+            if (confirm("Tem certeza que deseja excluir este usuário?")) {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        // Atualizar a tabela após a exclusão
+                        carregarUsuarios();
+                    }
+                };
+                xhttp.open("GET", "excluir.php?id=" + idUsuario, true);
+                xhttp.send();
+            }
+        }
+
+        // Função para filtrar usuários pelo nome
+        function filtrarUsuarios() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("searchInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("userTable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[0]; // índice 0 refere-se à coluna do nome
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+
+        // Chamar a função para carregar os usuários quando a página carregar
+        window.onload = carregarUsuarios;
+
+        // Adicionar um evento de listener para o evento input na barra de pesquisa
+        document.getElementById("searchInput").addEventListener("input", filtrarUsuarios);
+    </script>
+</body>
+</html>

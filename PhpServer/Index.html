@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="Styles/meu.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <title>TechFourOne</title>
+</head>
+<body>
+   <nav>
+    <ul>
+        <li><a href="#!">Inicio</a></li>
+        <li><a href="Envio.html">Serviços</a></li>
+        <li><a href="Table.html">Consulta</a></li>
+        <li><a href="#footer">Sobre</a></li>
+        <li><a href="#footer">Contato</a></li>
+    </ul>
+    </nav>
+
+    <div class="slider">
+        <div class="slides">
+          <img src="assets/slider1.png">
+          <img src="assets/daniel.png">
+        </div>
+        <a class="prev" onclick="moveSlides(-1)">&#10094;</a>
+        <a class="next" onclick="moveSlides(1)">&#10095;</a>
+      </div>
+      
+      <script>
+        let slideIndex = 0;
+      
+        function moveSlides(n) {
+          showSlides(slideIndex += n);
+        }
+      
+        function showSlides(n) {
+          let slides = document.querySelectorAll('.slides img');
+          if (n >= slides.length) {
+            slideIndex = 0;
+          } else if (n < 0) {
+            slideIndex = slides.length - 1;
+          }
+          slides.forEach((slide, index) => {
+            slide.style.display = (index === slideIndex) ? 'block' : 'none';
+          });
+        }
+      
+        showSlides(slideIndex);
+      </script>
+
+      <main class="main">
+        <h1 class="text-black">Sistemas Desenvolvidos</h1>
+        <h2 class="text-black">PadariaApp</h2>
+        <p class="text-black">Sistema para Gerenciamento de Estoque e Funcionarios. <br>Esse sistema ele tem o controle total dos items do estoque e da quantidade de funcionários que tem na padaria, cada produto e funcionario registrados são inseridos em uma tabela de controle para facilitar acesso a informações dessas Entidades</br></p>
+        <img class="img-centralizada" src="assets/Iniciopadaria.png">
+        <h3 class="text-black">TarefasAPP</h3>
+        <p class="text-black">Sistema para Gerenciamento de Projetos e Tarefas. Esse sistema ele aborda diversos públicos diferentes, como estudantes de ensino médio e universitarios.<br>Sistema de fácil uso e entendimento, onde você cadastra um projeto e adiciona uma tarefa a esse projeto.</br></p>
+        <img class="img-centralizada" src="assets/TarefasApp.jpeg">
+        <h3 class="text-black">Serviços propostos</h3>
+        <p class="text-black">Nós da TechFourOne te possibilitamos escolher entre duas opções. Serviços Web e Destkop, precisa construir seu site? utilizaremos as melhores tecnologias da atualidade para propor uma experiência inovadora. Por outro lado se optar por Serviços Desktop criaremos um aplicativo leve e portatil em qualquer tipo de sistema operacional para não haver complicações.</p>
+    
+    </main>
+      <footer class="py-5 bg-success" id = "footer">
+        <div class="container">
+            <div class="row align-items-start" id="sobre">
+                <div class="col-md-6 text-center">
+                    <h2 class="text-white">Sobre</h2>
+                    <p class="text-white">A TechFourOne é uma empresa que propõe serviços de tecnologia, a importância da tecnologia nos dias atuais vem tornando-se primordial. Aliás qual empresa não está a procura de serviços automatizados sem ter a necessidade de pagar mensalidade por serviços, aqui na TechFourOne propomos implementação e só cobramos uma única vez que será pela implementação do Sistema.</p>
+                </div>
+                <div class="col-md-6 text-center" id="contato">
+                    <h2 class="text-white">Contato</h2>
+                    <p class="text-white">Endereço: Rodovia Prefeito João Sampaio 486<br>Telefone: (21) 98091-3660<br>Email: danielmcd.dev@gmail.com</p>
+               
+                <div class="social-icons mt-4">
+                    <a href="https://www.instagram.com/daniel_macedo7/" target="_blank" class="text-white me-3"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/in/daniel-macedo-b0350a239/" target="_blank" class="text-white me-3"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/DanielMacedo7/Pizzaria" target="_blank" class="text-white"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <p class="text-white">Copyright &copy; Daniel Macedo Developer</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+      
+</body>
+</html>

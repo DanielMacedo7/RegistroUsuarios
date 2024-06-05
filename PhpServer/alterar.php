@@ -4,13 +4,14 @@ require 'config.php';
 require 'connect.php';
 
 // Verifica se todos os campos do formulário foram enviados via POST
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['Id']) && isset($_POST['Username']) && isset($_POST['email']) && isset($_POST['password']) && isset($_POST['cpf'])) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id']) && isset($_POST['tipo']) && isset($_POST['descricao']) && isset($_POST['finalidade']) && isset($_POST['cnpj'])) {
     // Obtém os dados do formulário
-    $id = $_POST['Id'];
-    $username = $_POST['Username'];
-    $email = $_POST['email'];
-    $telefone = $_POST['password'];
-    $cpf = $_POST['cpf'];
+    $id = $_POST['id'];
+    $tipo = $_POST['tipo'];
+    $descricao = $_POST['descricao'];
+    $finalidade = $_POST['finalidade'];
+    $cnpj = $_POST['cnpj'];
+
 
     // Conecta ao banco de dados usando a classe Connect
     try {
@@ -18,15 +19,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['Id']) && isset($_POST[
         $pdo = $connect->getPdo();
 
         // Atualiza os dados do usuário no banco de dados
-        $sql = "UPDATE usuarios SET username = :username, email = :email, telefone = :telefone, cpf = :cpf WHERE id = :id";
+        $sql = "UPDATE service SET tipo = :tipo, descricao = :descricao, finalidade = :finalidade, cnpj = :cnpj WHERE id = :id";
         $stmt = $pdo->prepare($sql);
 
         // Vincula os parâmetros
         $stmt->bindParam(':id', $id);
-        $stmt->bindParam(':username', $username);
-        $stmt->bindParam(':email', $email);
-        $stmt->bindParam(':telefone', $telefone);
-        $stmt->bindParam(':cpf', $cpf);
+        $stmt->bindParam(':tipo', $tipo);
+        $stmt->bindParam(':descricao', $descricao);
+        $stmt->bindParam(':finalidade', $finalidade);
+        $stmt->bindParam(':cnpj', $cnpj);
 
         // Executa a consulta
         $stmt->execute();

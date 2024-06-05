@@ -9,13 +9,13 @@ try {
     $pdo = $connect->getPdo();
 
     // Query para selecionar todos os usuários
-    $sql = "SELECT * FROM usuarios";
+    $sql = "SELECT * FROM service";
     $stmt = $pdo->query($sql);
 
     // Armazena os resultados em um array
-    $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $service = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    echo json_encode($usuarios);
+    echo json_encode($service);
 } catch (PDOException $e) {
     // Em caso de erro, exibe a mensagem de erro
     echo "Erro ao buscar dados no PostgreSQL: " . $e->getMessage();
